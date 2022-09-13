@@ -5,6 +5,7 @@ const ExpenseForm = (props) => {
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
+    // const [shouldHidden, setShouldHidden] = useState(true);
 
     // const [userInput, setUserInput] = useState({
     //     enteredTitle:'',
@@ -51,7 +52,7 @@ const ExpenseForm = (props) => {
         event.preventDefault();
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: +enteredAmount,
             date: new Date(enteredDate),
         }
         // console.log(expenseData);
@@ -59,9 +60,17 @@ const ExpenseForm = (props) => {
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
+        // setShouldHidden(true);
+
     }
 
-    return <form onSubmit={submitHandler}>
+    // const clickHandler = () => {
+    //     setShouldHidden(false);
+    // }
+
+    return <> 
+    {/* <h3 className={`displayform ${shouldHidden ? '' : 'hidden'}`} onClick={clickHandler}> Add New Expense </h3> */}
+    <form onSubmit={submitHandler} /*className={shouldHidden ? 'hidden' : ''}*/ >
         <div className="new-expense__controls">
             <div className="new-expense__control">
                 <label> Title </label>
@@ -79,9 +88,11 @@ const ExpenseForm = (props) => {
             </div>
         </div>
         <div className="new-expense__actions">
-            <button type="submit">Add New Expense</button>
+            <button type="button" onClick={props.onCancel}>Cancel</button>
+            <button type="submit">Add Expense</button>
         </div>
     </form>
+    </>
 }
 
 export default ExpenseForm;
